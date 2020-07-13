@@ -1,0 +1,57 @@
+version: '3.2'
+services:
+    jenkins:
+        image: southsystem/jenkins:lts
+        user: root
+        privileged: true
+        networks:
+            - jenkinsnet
+        # environment:
+           # Windows
+            #- DOCKER_HOST=tcp://localhost:2375
+          volumes:
+              - /home/ubuntu/Jenkins/:/home
+              - /home/ubuntu/Jenkins/Jenkins_data:/var/jenkins_home
+            # Linux e Mac
+            - /var/run/docker.sock:/var/run/docker.sock
+        ports:
+            - "8080:8080"
+            - "5000:5000"
+            - "50000:50000"
+
+    # sonarqube:
+    #     image: southsystem/sonar-kotlin:latest
+    #     ports:
+    #         - "9000:9000"
+    #     networks:
+    #         - jenkinsnet
+    #     environment:
+    #         - SONARQUBE_JDBC_URL=jdbc:postgresql://db:5432/sonar
+    #     volumes:
+    #         - sonarqube_conf:/opt/sonarqube/conf
+    #         - sonarqube_data:/opt/sonarqube/data
+    #         - sonarqube_extensions:/opt/sonarqube/extensions
+    #         - sonarqube_bundled-plugins:/opt/sonarqube/lib/bundled-plugins
+
+    # db:
+    #     image: postgres:alpine
+    #     networks:
+    #         - jenkinsnet
+    #     environment:
+    #         - POSTGRES_USER=sonar
+    #         - POSTGRES_PASSWORD=sonar
+    #     volumes:
+    #         - postgresql:/var/lib/postgresql
+
+networks:
+    jenkinsnet:
+        driver: bridge
+
+volumes:
+    jenkins-data:
+    # sonarqube_conf:
+    # sonarqube_data:
+    # sonarqube_extensions:
+    # sonarqube_bundled-plugins:
+    # postgresql:
+    # postgresql_data:
