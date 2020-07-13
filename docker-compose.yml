@@ -9,7 +9,7 @@ services:
         # environment:
            # Windows
             #- DOCKER_HOST=tcp://localhost:2375
-         volumes:
+        volumes:
             - /home/ubuntu/Jenkins/:/home
             - /home/ubuntu/Jenkins/Jenkins_data:/var/jenkins_home
             # Linux e Mac
